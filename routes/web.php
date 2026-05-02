@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BlogController::class, 'index'])->name('home');
 Route::get('/blog-detail/{blog:slug}', [BlogController::class, 'show'])->name('blog.detail');
 Route::get('/save/{blog}', [BlogController::class, 'save'])->name('blog.save')->middleware('auth');
+Route::get('/send-email', [BlogController::class, 'sendEmail'])->name('send.email');
 
 Route::get('/unsave/{blog}/unsaved', [BlogController::class, 'unsave'])->name('blog.unsave');
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use App\Mail\WelcomeUser;
 use App\Models\Blog;
 use App\Models\SavedBlog;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BlogController extends Controller
 {
@@ -93,5 +95,11 @@ class BlogController extends Controller
         $user = Auth::user();
         $savedBlogs = $user->savedBlogs()->with('blog')->get();
         return view('account.saved_blogs', compact('savedBlogs'));
+    }
+
+    public function sendEmail()
+    {
+        Mail::to('abdullah.term369@gmail.com')->send(new WelcomeUser());
+        return 'Email sent successfully!';
     }
 }
